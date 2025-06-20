@@ -25,6 +25,16 @@ services:
     ports:
       - 9100:9100
 
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
 networks:
   default:
     name: prometheus-grafana
@@ -32,3 +42,4 @@ networks:
 
 volumes:
   prometheus_data:
+  grafana_data:
