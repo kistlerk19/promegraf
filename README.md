@@ -225,16 +225,12 @@ Load Balancer
 ├── Prometheus Instance 2 (Standby)
 └── Prometheus Instance 3 (Standby)
 
-Shared Storage (NFS/GlusterFS)
-├── Grafana Cluster (3 nodes)
-└── Database (PostgreSQL HA)
+Shared Storage (TODO later, no enough time)
 Data consistency strategy:
 	•	Prometheus instances scrape the same targets
 	•	Accept some data duplication for reliability
 	•	Use recording rules consistently across instances
-	•	Implement leader election for alerting
 Trade-offs I'd make:
-	•	Complexity vs Reliability: Accept operational complexity for 99.9% uptime
 	•	Storage costs vs Durability: Replicated storage is expensive but necessary
 	•	Query performance vs Consistency: Eventual consistency acceptable for monitoring
 ```
@@ -297,10 +293,9 @@ telnet target-host 9100
 # Firewall rules
 iptables -L | grep 9100
 Most common causes I've encountered:
-	1	Firewall blocking port 9100 (60% of cases)
-	2	DNS resolution failure (20% of cases)
-	3	Node Exporter service down (15% of cases)
-	4	Configuration typo (5% of cases)
+	1	
+	2	Node Exporter service down 
+	3	Configuration typo 
 ```
 
 ## Question 14: Performance Optimization
@@ -337,19 +332,6 @@ the factors that contribute to storage growth, calculate retention policies base
 requirements, and design a data lifecycle management strategy. How would you balance
 historical data availability with resource constraints?
 ```
-Factors contributing to storage growth:
-	1	Number of active series - More servers = more metrics
-	2	Scrape frequency - 15s vs 60s quadruples storage needs
-	3	Retention period - 30 days vs 365 days
-	4	Series cardinality - High-cardinality labels explode storage
-Retention policy calculation:
-Daily storage = (active_series × samples_per_day × bytes_per_sample)
-Total storage = daily_storage × retention_days × compression_ratio
-Data lifecycle management strategy:
-	•	Tier 1 (0-7 days): High resolution, fast SSD storage
-	•	Tier 2 (7-30 days): Downsampled, regular storage
-	•	Tier 3 (30+ days): Heavily compressed, cold storage
-	•	Archive (1+ years): Export to data lake for compliance
 Balancing historical data vs resources:
 	•	Use recording rules to pre-calculate important queries
 	•	Export critical metrics to long-term storage
