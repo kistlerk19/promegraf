@@ -341,7 +341,9 @@ Balancing historical data vs resources:
 
 # Personal Insights and Lessons Learned
 Throughout this lab, I've gained several key insights:
+```
 	1	Monitoring is harder than it looks: Getting accurate metrics requires deep understanding of the underlying systems
 	2	Context matters more than raw numbers: A 90% CPU usage might be normal for a batch processing server
 	3	Alerting fatigue is real: Too many false positives make people ignore real issues
-	4	Documentation is crucial(i can't emphasize this enough. now i understand why Paul is always on it): Six months later, you won't remember why you set that threshold
+	4	Documentation is crucial(i can't emphasize this enough. now i understand why Paul 	is always on it): Six months later, you won't remember why you set that threshold
+```
